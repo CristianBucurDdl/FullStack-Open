@@ -1,15 +1,30 @@
 import { useState } from "react";
 
+const StatisticLine = (props) => {
+  return (
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
+  );
+};
+
 const Statistics = (props) => {
   return (
     <div>
-      <h2>statistics</h2>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.all}</p>
-      <p>average{props.averageTotal}</p>
-      <p>positive {props.positive}</p>
+      {props.props.all === 0 ? (
+        <p>No statistics</p>
+      ) : (
+        <>
+          <h2>statistics</h2>
+          <StatisticLine text="good" value={props.props.good} />
+          <StatisticLine text="neutral" value={props.props.neutral} />
+          <StatisticLine text="bad" value={props.props.bad} />
+          <StatisticLine text="all" value={props.props.all} />
+          <StatisticLine text="average" value={props.props.averageTotal} />
+          <StatisticLine text="positive" value={props.props.positive} />
+        </>
+      )}
     </div>
   );
 };
@@ -26,12 +41,19 @@ const App = () => {
   function percentage(partialValue, totalValue) {
     return (100 * partialValue) / totalValue;
   }
-  const porps = {
-    all: good + neutral + bad,
-    average1: good - bad,
-    averageTotal: average1 / all,
+  const all = good + neutral + bad;
+  const average1 = good - bad;
+  const averageTotal = average1 / all;
 
-    positive: percentage(good, all),
+  const positive = percentage(good, all);
+  const props = {
+    good: good,
+    neutral: neutral,
+    bad: bad,
+    all: all,
+    average1: average1,
+    averageTotal: averageTotal,
+    positive: positive,
   };
 
   return (
@@ -40,7 +62,7 @@ const App = () => {
       <Button handleClick={() => setGood(good + 1)} text="good" />
       <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
       <Button handleClick={() => setBad(bad + 1)} text=" bad" />
-      <Statistics props={porps} />
+      <Statistics props={props} />
     </div>
   );
 };
