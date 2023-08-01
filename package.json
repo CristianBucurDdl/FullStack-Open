@@ -1,5 +1,8 @@
 {
   "name": "rm",
   "version": "0.1.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "redux": "^4.2.1"
+  }
 }
