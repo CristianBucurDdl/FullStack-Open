@@ -20,6 +20,7 @@ const Notes = () => {
       ? state.notes.filter((note) => note.important)
       : state.notes.filter((note) => !note.important);
   });
+  console.log(useSelector((state) => state.filter));
 
   return (
     <ul>

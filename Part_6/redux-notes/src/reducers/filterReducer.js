@@ -7,11 +7,11 @@ const filterReducer = (state = "ALL", action) => {
   }
 };
 
-export const filterChange = (filter) => {
-  console.log(filter);
+export const filterChange = (value) => {
+  console.log(value);
   return {
     type: "SET_FILTER",
-    payload: { filter },
+    payload: value,
   };
 };
 
