@@ -10,6 +10,7 @@ const NewNote = (props) => {
     event.target.note.value = "";
     dispatch(createNote(content));
   };
+  //comments to me
   dispatch(createNote("Redux Toolkit is awesome!"));
   return (
     <form onSubmit={addNote}>
