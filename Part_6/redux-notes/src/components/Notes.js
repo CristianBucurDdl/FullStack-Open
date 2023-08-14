@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleImportanceOf } from "../reducers/noteReducer";
+import { createNote, toggleImportanceOf } from "../reducers/noteReducer";
 
 const Note = ({ note, handleClick }) => {
   return (
@@ -12,6 +12,7 @@ const Note = ({ note, handleClick }) => {
 
 const Notes = () => {
   const dispatch = useDispatch();
+
   const notes = useSelector((state) => {
     if (state.filter === "ALL") {
       return state.notes;
@@ -21,6 +22,7 @@ const Notes = () => {
       : state.notes.filter((note) => !note.important);
   });
   console.log(useSelector((state) => state.filter));
+  console.log(notes);
 
   return (
     <ul>

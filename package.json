@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react-query": "^3.39.3",
+    "@reduxjs/toolkit": "^1.9.5",
     "redux": "^4.2.1"
   },
   "devDependencies": {
