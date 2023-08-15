@@ -14,7 +14,6 @@ const AnecdoteList = () => {
       ? anecdotes
       : anecdotes.filter((n) => n.content.toLowerCase().includes(filterValue));
 
-  console.log(filteredAnecdotes);
   const style = {
     border: "solid",
     padding: 10,
@@ -23,7 +22,9 @@ const AnecdoteList = () => {
   return (
     <>
       {filteredAnecdotes
+        .slice()
         .sort((a, b) => b.votes - a.votes)
+        //
         .map((anecdote) => (
           <div style={style} key={anecdote.id}>
             <div>{anecdote.content}</div>

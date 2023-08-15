@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-import initialReducer from "./anecdoteReducer";
+import initialReducer, { anecdotesSlice } from "./anecdoteReducer";
+// import initialReducer, { anecdotesSlice } from "./anecdoteReducer";
 // import { filterReducer } from "./filterReducer";
 
 export const filterSlice = createSlice({
@@ -13,7 +14,11 @@ export const filterSlice = createSlice({
   },
 });
 export const store = configureStore({
-  reducer: { filter: filterSlice.reducer, anecdotes: initialReducer },
+  reducer: {
+    filter: filterSlice.reducer,
+
+    anecdotes: anecdotesSlice.reducer,
+  },
 });
 export const { setFilter } = filterSlice.actions;
 export default filterSlice;
