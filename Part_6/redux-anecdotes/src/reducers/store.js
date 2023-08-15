@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-import initialReducer, { anecdotesSlice } from "./anecdoteReducer";
+import { anecdotesSlice } from "./anecdoteReducer";
+import notificationSlice from "./notificationReducer";
 // import initialReducer, { anecdotesSlice } from "./anecdoteReducer";
 // import { filterReducer } from "./filterReducer";
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     filter: filterSlice.reducer,
 
     anecdotes: anecdotesSlice.reducer,
+    notification: notificationSlice.reducer,
   },
 });
 export const { setFilter } = filterSlice.actions;
