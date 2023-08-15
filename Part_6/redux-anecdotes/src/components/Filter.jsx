@@ -1,14 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { theFilterValue } from "../reducers/filterReducer";
-import { addVote } from "../reducers/anecdoteReducer";
+import { filterReducer } from "../reducers/filterReducer";
 
 export const Filter = () => {
   const dispatch = useDispatch();
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log(value);
-    const action = theFilterValue(value);
+
+    const action = filterReducer(value.toLowerCase());
     dispatch(action);
   };
   const style = {
