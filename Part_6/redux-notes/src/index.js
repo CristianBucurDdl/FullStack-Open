@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createStore, combineReducers } from "redux";
+
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import App from "./App";
-// import noteReducer, { createNote } from "./reducers/noteReducer";
-import noteReducer from "./reducers/noteReducer";
-import filterReducer, { filterChange } from "./reducers/filterReducer";
+import noteService from "./services/notes";
+import noteReducer, { appendNote, setNotes } from "./reducers/noteReducer";
+import filterReducer from "./reducers/filterReducer";
 
+// noteService.getAll().then((notes) => store.dispatch(setNotes(notes)));
 const store = configureStore({
   reducer: {
     notes: noteReducer,
