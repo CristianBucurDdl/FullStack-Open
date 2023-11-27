@@ -1,0 +1,15 @@
+{
+  "name": "phone_book",
+  "version": "0.1.0",
+  "description": "phoneBook backEnd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Mognoom",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
