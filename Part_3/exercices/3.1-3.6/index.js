@@ -1,3 +1,6 @@
+const express = require("express");
+const app = express();
+
 const phoneBook = [
   {
     id: 1,
@@ -20,9 +23,12 @@ const phoneBook = [
     number: "39-23-6423122",
   },
 ];
-const express = require("express");
-const app = express();
+
+app.get("/api/persons", (request, response) => {
+  response.json(phoneBook);
+});
 
 const PORT = 3001;
-app.listen(PORT);
-console.log(`Server running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
