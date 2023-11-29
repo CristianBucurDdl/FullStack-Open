@@ -44,7 +44,17 @@ app.get("/api/persons/:id", (request, response) => {
   const id = Number(request.params.id);
   const phoneNumber = phoneBook.find((phone) => phone.id === id);
 
-  phoneNumber ? response.json(phoneNumber) : response.status(400).end();
+  phoneNumber
+    ? response.json(phoneNumber)
+    : response.status(400).end(`<p>ops wrong number</p>`);
+});
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const phoneNumber = phoneBook.filter((phone) => phone.id === id);
+
+  phoneNumber.length > 0
+    ? response.status(204).end(console.log(phoneNumber))
+    : response.status(404).end();
 });
 
 const PORT = 3001;
