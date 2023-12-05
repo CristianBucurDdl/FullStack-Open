@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+app.use(express.json());
 const phoneBook = [
   {
     id: 1,
@@ -55,6 +55,35 @@ app.delete("/api/persons/:id", (request, response) => {
   phoneNumber.length > 0
     ? response.status(204).end(console.log(phoneNumber))
     : response.status(404).end();
+});
+
+const generateId = () => {
+  const maxId =
+    phoneBook.length > 0 ? Math.max(...phoneBook.map((n) => n.id)) : 0;
+  return maxId + 1;
+};
+const nameList = [...phoneBook.map((n) => n.name)];
+
+app.post("/api/persons", (request, response) => {
+  const person = request.body;
+  if (!person.name || !person.number) {
+    return response.status(400).json({
+      error: "content missing",
+    });
+  }
+  if (nameList.includes(person.name)) {
+    return response.status(400).json({ error: "name Exists" });
+  }
+
+  const newPerson = {
+    name: person.name,
+    number: person.number,
+    id: generateId(),
+  };
+  phoneBook.concat(newPerson);
+
+  console.log(newPerson);
+  response.json(person);
 });
 
 const PORT = 3001;
