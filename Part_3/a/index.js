@@ -3,18 +3,8 @@ const app = express();
 app.use(express.json());
 const cors = require("cors");
 app.use(cors());
-// app.use(express.static("dist"));
-// const corsOptions = {
-//   origin: "http://localhost:5173", // Replace with your front-end's actual origin
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   credentials: true, // Allow cookies to be sent with the request
-//   optionsSuccessStatus: 204,
-// };
-// const cors = require("cors");
+app.use(express.static("dist"));
 
-// app.listen();
-// app.use(cors());
-// app.use(express.static("dist"));
 let notes = [
   { id: 1, content: "HTML is easy", important: true },
   { id: 2, content: "Browser can execute only JavaScript", important: false },
@@ -56,22 +46,7 @@ app.post("/api/notes/:id", (request, response) => {
   let newNotes = notes.map((note) => (note.id !== id ? note : changedNote));
   notes = newNotes;
   console.log(newNotes);
-  // const note = notes.find((note) => {
-  //   console.log(note.id, typeof note.id, id, typeof id, note.id === id);
-  //   return note.id === id;
-  // });
-  // console.log(note);
-  // response.json(note);
-  // const body = request.body;
-  // const note = {
-  //   content: body.content,
-  //   important: body.important || false,
-  //   id: generateId(),
-  // };
 
-  // notes = notes.concat(note);
-
-  // response.json(noteToChange);
   response.status(202).end();
 });
 ///post new note
