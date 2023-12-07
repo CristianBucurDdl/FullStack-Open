@@ -1,7 +1,18 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+const cors = require("cors");
+app.use(cors());
+// app.use(express.static("dist"));
+// const corsOptions = {
+//   origin: "http://localhost:5173", // Replace with your front-end's actual origin
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   credentials: true, // Allow cookies to be sent with the request
+//   optionsSuccessStatus: 204,
+// };
 // const cors = require("cors");
+
+// app.listen();
 // app.use(cors());
 // app.use(express.static("dist"));
 let notes = [
@@ -37,7 +48,7 @@ const generateId = () => {
   const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0;
   return maxId + 1;
 };
-///cheange importance post request
+///change importance post request
 app.post("/api/notes/:id", (request, response) => {
   const id = Number(request.params.id);
   const noteToChange = notes.find((note) => note.id === id);
