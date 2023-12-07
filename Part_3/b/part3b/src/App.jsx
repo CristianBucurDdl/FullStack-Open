@@ -8,7 +8,8 @@ const App = () => {
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(false);
   // const baseUrl = "https://test2-jkp7.onrender.com/api/notes";
-  const baseUrl = "https://localhost:3001/api/notes";
+  const baseUrl = "/api/notes";
+  // const baseUrl = "https://localhost:3001/api/notes";
   useEffect(() => {
     axios.get(baseUrl).then((response) => {
       setNotes(response.data);
@@ -33,9 +34,11 @@ const App = () => {
     setNewNote(event.target.value);
   };
   const changeImportant = (id) => {
-    axios.post(baseUrl + `/:${id}`).then((response) => {
-      console.log(response);
-    });
+    axios.post(baseUrl + `/${id}`).then(
+      axios.get(baseUrl).then((response) => {
+        setNotes(response.data);
+      })
+    );
   };
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
   // console.log(notes);
