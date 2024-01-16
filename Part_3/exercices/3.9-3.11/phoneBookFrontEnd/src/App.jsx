@@ -27,17 +27,18 @@ const phoneBook = [
 ];
 const App = () => {
   const [persons, setPersons] = useState(phoneBook);
-  const [newPerson, setNewPerson] = useState("");
+  const [newPerson, setNewPerson] = useState([]);
+  const [newPersonApi, setNewPersonApi] = useState([]);
   const [showAll, setShowAll] = useState(false);
   // console.log(persons);
   // const baseUrl = "/api/notes";
-  const baseUrl = "https://localhost:3001/api/persons";
-  // useEffect(() => {
-  //   axios.get(baseUrl).then((response) => {
-  //     setNotes(response.data);
-  //     console.log(response.data);
-  //   });
-  // }, []);
+  const baseUrl = "https:/localhost:3001";
+  useEffect(() => {
+    axios.get(baseUrl + "/api/persons").then((response) => {
+      setNewPersonApi(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   const addPerson = (event) => {
     console.log();
@@ -74,7 +75,7 @@ const App = () => {
         </button> */}
       </div>
       <ul>
-        {persons.map((person) => (
+        {newPersonApi.map((person) => (
           <div>
             <Person key={person.id} person={person} />
           </div>

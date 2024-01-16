@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+
 app.use(express.json());
+app.use(express.static("dist"));
 const phoneBook = [
   {
     id: 1,
@@ -67,7 +69,8 @@ const nameList = [...phoneBook.map((n) => n.name)];
 app.post("/api/persons", (request, response) => {
   const person = request.body;
   if (!person.name || !person.number) {
-    return response.status(400).json({
+    return response.status(405).json({
+      content: JSON.stringify(person),
       error: "content missing",
     });
   }
