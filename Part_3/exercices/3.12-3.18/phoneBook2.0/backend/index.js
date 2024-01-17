@@ -29,8 +29,13 @@ const phoneBook = [
   },
 ];
 
-app.get("/persons", (request, response) => {
+app.get("api/persons", (request, response) => {
   response.json(phoneBook);
+});
+app.get("/persons", (request, response) => {
+  response.status(401).json({
+    error: " wrong address",
+  });
 });
 
 const PORT = 3001;
