@@ -18,7 +18,7 @@ function App() {
   // const baseUrl = "https://phonebook-backend-4b60.onrender.com";
   useEffect(() => {
     axios
-      .get("http://localhost:3001/persons")
+      .get("/persons")
       .then((response) => {
         setPersons(response.data);
         console.log(response.data);
