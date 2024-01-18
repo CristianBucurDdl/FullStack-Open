@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 
-app.use(cors());
 app.use(express.json());
 app.use(express.static("dist"));
 const phoneBook = [
@@ -27,9 +25,68 @@ const phoneBook = [
     number: "39-23-6423122",
   },
 ];
+const currentDate = new Date().toLocaleString();
 
-app.get("/persons", (request, response) => {
+// const infoContent = (
+//   <p>{`Phonebook has info for ${phoneBook.length} people `}</p>
+// );
+
+app.get("/api/persons", (request, response) => {
   response.json(phoneBook);
+});
+
+app.get("/info", (request, response) => {
+  response.writeHead(200, { "Content-type": "html" });
+  response.end(
+    `<p>Phonebook has info for ${phoneBook.length} people</p><br/> <p>${currentDate}</p>`
+  );
+});
+
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const phoneNumber = phoneBook.find((phone) => phone.id === id);
+
+  phoneNumber
+    ? response.json(phoneNumber)
+    : response.status(400).end(`<p>ops wrong number</p>`);
+});
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const phoneNumber = phoneBook.filter((phone) => phone.id === id);
+
+  phoneNumber.length > 0
+    ? response.status(204).end(console.log(phoneNumber))
+    : response.status(404).end();
+});
+
+const generateId = () => {
+  const maxId =
+    phoneBook.length > 0 ? Math.max(...phoneBook.map((n) => n.id)) : 0;
+  return maxId + 1;
+};
+const nameList = [...phoneBook.map((n) => n.name)];
+
+app.post("/api/persons", (request, response) => {
+  const person = request.body;
+  if (!person.name || !person.number) {
+    return response.status(405).json({
+      content: JSON.stringify(person),
+      error: "content missing",
+    });
+  }
+  if (nameList.includes(person.name)) {
+    return response.status(400).json({ error: "name Exists" });
+  }
+
+  const newPerson = {
+    name: person.name,
+    number: person.number,
+    id: generateId(),
+  };
+  phoneBook.concat(newPerson);
+
+  console.log(newPerson);
+  response.json(person);
 });
 
 const PORT = 3001;
