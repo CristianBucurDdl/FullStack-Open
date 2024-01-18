@@ -29,7 +29,7 @@ const phoneBook = [
   },
 ];
 
-app.get("api/persons", (request, response) => {
+app.get("/api/persons", (request, response) => {
   response.json(phoneBook);
 });
 app.get("/persons", (request, response) => {
